@@ -22,16 +22,16 @@ zone.value = localStorage.getItem("currentCSS");
 function userstyle() {
 
   if (zone.value == "Dark") {
-    changeCSS('../.styles/dark.css');
+    changeCSS('../styles/dark.css');
     localStorage.setItem("currentCSS","Dark");
   } else if (zone.value == "Light") {
-    changeCSS('../.styles/light.css')
+    changeCSS('../styles/light.css')
     localStorage.setItem("currentCSS","Light");
   } else if (zone.value == "Yotsuba") {
-    changeCSS('../.styles/yotsuba.css')
+    changeCSS('../styles/yotsuba.css')
     localStorage.setItem("currentCSS","Yotsuba");
   } else if (zone.value == "Yotsuba B") {
-    changeCSS('../.styles/yotsuba-b.css')
+    changeCSS('../styles/yotsuba-b.css')
     localStorage.setItem("currentCSS","Yotsuba B");
   }
 }
