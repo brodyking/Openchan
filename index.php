@@ -28,8 +28,10 @@
         </div>
 
         <div id="head">
-
-            <h1>Welcome!</h1> 
+            <a href="index.php">
+            <img src="static/openchan.png" style="width: 45%;margin: 10px;">
+</a>
+            <h1> </h1> 
                     <table>
                     <tr>
                     <td class="top">
