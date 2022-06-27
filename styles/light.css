@@ -1,0 +1,62 @@
+body {
+    background-color: #eeeeee;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.highlight {
+    color: #004a99;
+}
+a {
+    color: #f60;
+}
+gt {
+    color: #b5bd68;
+}
+rt {
+    color: #bd6868;
+}
+pt {
+    color: rgb(142, 51, 226);
+}
+#nav {
+}
+#head h1,h2,h3 {
+    font-family: Tahoma,sans-serif;
+    color: #004a99;
+}
+input {
+    border: 1px solid #ccc;
+    color: black;
+}
+hr {
+    border-top: 1px solid #282a2e;
+}
+table {
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0px 4px 5px #dddddd;
+}
+tr {
+    border: 1px solid #ccc;
+}
+tr .top {
+    background-color: #dddddd;
+    color: #004a99;
+}
+tr .top .left{
+    color: #f60;
+}
+td {
+    border: 1px solid #ccc;
+}
+@media only screen and (max-device-width: 480px) {
+    #nav {
+        background-color: #eeeeee;
+        border: 0px solid black;
+    }
+}
+textarea {        
+    color: black;
+    border: 1px solid #ccc;
+    font-family: Arial, Helvetica, sans-serif;
+}

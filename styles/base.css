@@ -1,0 +1,128 @@
+body {
+    font-size: 10pt;
+    margin: 0px;
+}
+a {
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: none;
+}
+gt::before {
+    content: "> ";
+}
+#nav {
+    padding: 5px;
+    font-size: 9pt;
+    display: block;
+}
+#head {
+    display: block;
+    text-align: -webkit-center;
+    max-width: 525px;
+    margin: auto;
+    margin-bottom: 3em;
+    padding: 5px;
+}
+#head .motdtop {
+    font-size: 11px;
+    margin-top: 16px;
+    text-align: left;
+    display: block;
+}
+#head table {
+    width: 100%;
+    margin-bottom: 0.75em;
+}
+#content table {
+    width: 100%;
+    margin-bottom: 0.75em;
+}
+.center {
+    display: block;
+    text-align: -webkit-center;
+    max-width: 525px;
+    margin: auto;
+    margin-bottom: 3em;
+    padding: 5px;
+}
+#content {
+    padding: 5px;
+}
+input {
+    padding: 5px;
+    border-radius: 0px;
+    margin-bottom: 5px;
+}
+#banner {
+    display: block;
+    float: center;
+    width: 270px;
+    margin-top: 30px;
+}
+hr {
+    border: none;
+}
+.left {
+    text-align: left;
+    float: left;
+    display: inline-block;
+}
+.right {
+    text-align: right;
+    float: right;
+    display: inline-block;
+}
+table {
+    text-align: left;
+    position: relative;
+    border-collapse: collapse; 
+    padding: 0px;
+}
+tr {
+    margin: 0px;
+    padding: 0px;
+}
+td {
+    padding:0px;
+    padding: 5px;
+}
+td a {
+    font-weight: bolder;
+}
+td a:hover {
+    text-decoration: underline;
+}
+
+@media only screen and (max-device-width: 480px) {
+    #nav {
+        padding: 5px;
+        font-size: 9pt;
+        display: block;
+        box-shadow: none;
+    }
+    #content {
+        display: block;
+        text-align: -webkit-center;
+    }
+}
+#pageparam {
+    display: none;
+}
+
+textarea {        
+    padding: 5px;
+    border-radius: 0px;
+    margin-bottom: 5px;
+    width: 75%;
+}
+table img {
+    width: 100%;
+}
+#head h1,h2,h3 {
+    letter-spacing: -0.06ch;
+}
+.overchanlink {
+    font-weight: bold;
+    margin-right: 10px;
+}
