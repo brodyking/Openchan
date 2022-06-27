@@ -9,7 +9,7 @@
         <link rel="shortcut icon" href="favicon.ico">
         <title>Openchan Rules</title>
         <script defer src="../userstylesb.js"></script>
-        <link rel="stylesheet" href="../.styles/base.css">
+        <link rel="stylesheet" href="../styles/base.css">
     </head>
     <body>
         <div id="nav">&nbsp;

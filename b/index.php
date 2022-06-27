@@ -9,7 +9,7 @@
         <link rel="shortcut icon" href="../favicon.png">
         <title>Openchan /b/</title>
         <script defer src="../userstylesb.js"></script>
-        <link rel="stylesheet" href="../.styles/base.css">
+        <link rel="stylesheet" href="../styles/base.css">
         <?php
             $db = "database.html";
             $bn = "b";
