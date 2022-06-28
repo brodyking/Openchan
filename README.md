@@ -64,7 +64,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 - [x] Add MOAR CSS
 - [x] Allow Image Uploading
 - [ ] Make it so you cant post <script> inside of your post body
-
+- [ ] Add formatting for greentext and bold. Currently you can use HTML, which is insecure.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
