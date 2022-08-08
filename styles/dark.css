@@ -2,7 +2,9 @@ body {
     background-color: #1d1f21;
     color: #c5c8c6;
     font-family: Arial, Helvetica, sans-serif;
-}
+    word-wrap: break-word;
+    word-break: break-all;
+} 
 highlight {
     color: #81c564;
 }
