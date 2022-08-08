@@ -144,10 +144,10 @@ if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg
     }
 // Check if $uploadOk is set to 0 by an error
 if ($uploadOk == 0) {
-    file_put_contents($db,'<table id="' . file_get_contents('postcount.txt') . '"><tr><td class="top"><span class="left"><b>Anonymous <pt>#'. file_get_contents('postcount.txt') . '</pt></span><span class="right"> ' . date("m-d-y") . ' ' . date("h:i a") . ' </span></b></td></tr><tr><td>' . $_POST['content'] . '</td></tr></table>' . file_get_contents($db));
+    file_put_contents($db,'<table id="' . file_get_contents('postcount.txt') . '"><tr><td class="top"><span class="left"><b>Anonymous <pt>#'. file_get_contents('postcount.txt') . '</pt></span><span class="right"> ' . date("m-d-y") . ' ' . date("h:i a") . ' </span></b></td></tr><tr><td>'. htmlentities($_POST['content']) . '</td></tr></table>' . file_get_contents($db));
     
     // Overchan database
-    file_put_contents('../overchan/database.html','<table><tr><td class="top"><span class="left"><a class="highlight overchanlink" href="../' . $bn . '">/' . $bn . '/</a> <b>Anonymous  <pt>#'. file_get_contents('postcount.txt') . '</pt></span><span class="right"> ' . date("m-d-y") . ' ' . date("h:i a") . ' </span></b></td></tr><tr><td>' . $_POST['content'] . '</td></tr></table>' . file_get_contents('../overchan/database.html'));
+    file_put_contents('../overchan/database.html','<table><tr><td class="top"><span class="left"><a class="highlight overchanlink" href="../' . $bn . '">/' . $bn . '/</a> <b>Anonymous  <pt>#'. file_get_contents('postcount.txt') . '</pt></span><span class="right"> ' . date("m-d-y") . ' ' . date("h:i a") . ' </span></b></td></tr><tr><td>' . htmlentities($_POST['content']) . '</td></tr></table>' . file_get_contents('../overchan/database.html'));
     
     echo "<script>
     window.location.href = '" , htmlspecialchars($_SERVER['PHP_SELF']) , "'
@@ -158,10 +158,10 @@ if ($uploadOk == 0) {
     echo "Sorry, there was an error uploading your file.";
   } else {
     echo "The file ". htmlspecialchars( basename( $_FILES["fileToUpload"]["name"])). " has been uploaded.";
-    file_put_contents($db,'<table id="' . file_get_contents('postcount.txt') . '"><tr><td class="top"><span class="left"><b>Anonymous  <pt>#'. file_get_contents('postcount.txt') . '</pt></span><span class="right"> ' . date("m-d-y") . ' ' . date("h:i a") . ' </span></b></td></tr><tr><td><img src="data/'  . basename($_FILES["fileToUpload"]["name"]) . '"><br><br>' . $_POST['content'] . '</td></tr></table>' . file_get_contents($db));
+    file_put_contents($db,'<table id="' . file_get_contents('postcount.txt') . '"><tr><td class="top"><span class="left"><b>Anonymous  <pt>#'. file_get_contents('postcount.txt') . '</pt></span><span class="right"> ' . date("m-d-y") . ' ' . date("h:i a") . ' </span></b></td></tr><tr><td><img src="data/'  . basename($_FILES["fileToUpload"]["name"]) . '"><br><br>' . htmlentities($_POST['content']) . '</td></tr></table>' . file_get_contents($db));
     
     // Overchan databse
-    file_put_contents('../overchan/database.html','<table><tr><td class="top"><span class="left"><a class="highlight overchanlink" href="../' . $bn . '">/' . $bn . '/</a> <b>Anonymous  <pt>#'. file_get_contents('postcount.txt') . '</pt> </span><span class="right"> ' . date("m-d-y") . ' ' . date("h:i a") . ' </span></b></td></tr><tr><td><img src="../' . $bn . '/data' . '/' . basename($_FILES["fileToUpload"]["name"]) . '"><br><br>' . $_POST['content'] . '</td></tr></table>' . file_get_contents('../overchan/database.html'));
+    file_put_contents('../overchan/database.html','<table><tr><td class="top"><span class="left"><a class="highlight overchanlink" href="../' . $bn . '">/' . $bn . '/</a> <b>Anonymous  <pt>#'. file_get_contents('postcount.txt') . '</pt> </span><span class="right"> ' . date("m-d-y") . ' ' . date("h:i a") . ' </span></b></td></tr><tr><td><img src="../' . $bn . '/data' . '/' . basename($_FILES["fileToUpload"]["name"]) . '"><br><br>' . htmlentities($_POST['content']) . '</td></tr></table>' . file_get_contents('../overchan/database.html'));
 
     echo "<script>
     window.location.href = '" , htmlspecialchars($_SERVER['PHP_SELF']) , "'
