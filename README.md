@@ -1,3 +1,6 @@
+> [!CAUTION]
+> This software is insecure, and should not be used without scrubbing the user input data.
+
 
 <div id="top"></div>
 
