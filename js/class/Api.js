@@ -5,6 +5,7 @@ export class Api {
       body: document.getElementById("newThreadContent").value,
       title: document.getElementById("newThreadTitle").value
     }
+    let output = []
 
     console.log(JSON.stringify(messageBody))
     try {
@@ -15,10 +16,12 @@ export class Api {
       }).then(response => response.json()) // Parse the JSON response from the server
         .then(data => {
           console.log('Success:', data); // Handle the success
+          output = data;
         })
     } catch (e) {
       console.error(e);
     }
+    return output;
   }
   static async getThreadList() {
     let output = []
@@ -33,5 +36,28 @@ export class Api {
       console.error(e);
     }
     return output
+  }
+  static async getThread() {
+    let messageBody = {
+      id: 1
+    }
+    let output = []
+
+    console.log(JSON.stringify(messageBody))
+    try {
+      const response = await fetch("/api/getThread.php", {
+        method: "POST",
+        // Set the FormData instance as the request body
+        body: JSON.stringify(messageBody),
+      }).then(response => response.json()) // Parse the JSON response from the server
+        .then(data => {
+          output = data;
+          output[0]["content"] = JSON.parse(output["content"])
+          console.log('Success:', data); // Handle the success
+        })
+    } catch (e) {
+      console.error(e);
+    }
+    return output;
   }
 }

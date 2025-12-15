@@ -4,7 +4,13 @@ import { Api } from "/js/class/Api.js"
 
 let url = Util.url;
 let page = ""
+const searchParams = new URLSearchParams(window.location.search);
+const paramsArray = [...searchParams];
+console.log(paramsArray);
+
 switch (url) {
+
+  // Home Threads Page
   case "/":
     // Get threads page template
     await Pages.threads().then(output => Util.main = output);
@@ -16,6 +22,14 @@ switch (url) {
       })
     });
     break;
+
+  // Individual Thread Page
+  case "/thread":
+    await Pages.thread().then(output => Util.main = output);
+    await Api.getThread()
+    break;
+
+  // New Thread Page
   case "/new":
     // Gets the page
     await Pages.new().then(output => Util.main = output);

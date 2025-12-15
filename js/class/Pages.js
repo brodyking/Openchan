@@ -27,4 +27,7 @@ export class Pages {
   static async threads() {
     return await this.getStatic("/static/threads.html");
   }
+  static async thread() {
+    return await this.getStatic("/static/thread.html")
+  }
 }
