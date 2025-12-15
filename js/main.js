@@ -6,16 +6,20 @@ let url = Util.url;
 let page = ""
 switch (url) {
   case "/":
+    // Get threads page template
     await Pages.threads().then(output => Util.main = output);
+    // Populate thread list
     await Api.getThreadList().then((output) => {
       output.forEach((element) => {
-        document.getElementById("threadsBody").innerHTML += '<tr><td>' + element.title + '</td><td>' + element.author + '</td></tr>';
+        console.log(element)
+        document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td></tr>';
       })
     });
     break;
   case "/new":
-    // Gets the page, sets the main dom to contian it
+    // Gets the page
     await Pages.new().then(output => Util.main = output);
+    // Submit Listener to create a new thread
     document.getElementById("newThreadForm").addEventListener("submit", (event) => { event.preventDefault(); Api.newThread() });
     break;
   default:
