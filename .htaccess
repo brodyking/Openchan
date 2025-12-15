@@ -1,0 +1,12 @@
+# Enable URL Rewriting
+
+RewriteEngine On
+DirectoryIndex index.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.+)$ index.html?url=$1 [QSA,L]
+
+Options -Indexes
+
+ErrorDocument 403 /404
+ErrorDocument 404 /404
