@@ -19,6 +19,16 @@ body {
   font-family: "GeistRegular"
 }
 
+main {
+  max-width: 1200px;
+  margin: auto;
+  padding: 10px;
+}
+
+h1 {
+  text-align: center;
+}
+
 a {
   color: white;
   text-decoration: underline;
@@ -36,7 +46,7 @@ a:hover {
 #nav>ul {
   list-style-type: none;
   overflow: hidden;
-  padding: 0px;
+  padding-left: 7px;
 }
 
 #nav>ul>li {
@@ -109,4 +119,31 @@ textarea {
   border: 1px solid lab(100 0 0 / 0.1);
   border-radius: .5rem;
   padding: 8px;
+}
+
+#threadsTable {
+  width: 100%;
+}
+
+#newThreadForm,
+#newReplyForm {
+  max-width: 600px;
+  margin: auto;
+}
+
+.replybody {
+  font-family: GeistMono;
+  font-size: 13px;
+}
+
+#threadAuthor {
+  display: inline;
+}
+
+@media screen and (max-width: 600px) {
+  #threadAuthor {
+    display: block;
+    text-align: center;
+    float: center;
+  }
 }

@@ -53,7 +53,7 @@ switch (url) {
         let replies = data["replies"]
         replies.forEach((reply) => {
           // Create each thread
-          document.getElementById("threadReplies").innerHTML += "<table><thead><td><b>" + reply.author + "</b></td><td>" + reply.date + "</td><td>#" + reply.id + "</td></thead><tbody><td id='reply-" + reply.id + "'></td></tr></tbody></table>"
+          document.getElementById("threadReplies").innerHTML += "<table><thead><td><b>" + reply.author + "</b></td><td>" + reply.date + "</td><td>#" + reply.id + "</td></thead><tbody><td class='replybody' id='reply-" + reply.id + "'></td></tr></tbody></table>"
           document.getElementById("reply-" + reply.id).innerText = reply.body;
         })
       }
