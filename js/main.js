@@ -42,15 +42,19 @@ switch (url) {
         document.getElementById("threadAuthor").innerText = data["author"]
         document.getElementById("threadTitle").innerText = data["title"]
 
+        // Add reply button
+        navInner.innerHTML += '<li style="float:right;"><a href="#" id="threadReplyBtn" class="btn">Reply</a></li>'
+
         // Attach link to the reply button
         document.getElementById("threadReplyBtn").href = "/reply?id=" + data["id"];
+
 
         // Replies
         let replies = data["replies"]
         replies.forEach((reply) => {
           // Create each thread
-          document.getElementById("threadReplies").innerHTML += "Author: <b><i>" + reply.author + "</i></b> Date: <b><i>" + reply.date + "</i></b> Id: <code>" + reply.id + "</code><br><div id='" + reply.id + "'></div><hr>"
-          document.getElementById(reply.id).innerText = reply.body;
+          document.getElementById("threadReplies").innerHTML += "<table><thead><td><b>" + reply.author + "</b></td><td>" + reply.date + "</td><td>#" + reply.id + "</td></thead><tbody><td id='reply-" + reply.id + "'></td></tr></tbody></table>"
+          document.getElementById("reply-" + reply.id).innerText = reply.body;
         })
       }
 
@@ -118,8 +122,8 @@ switch (url) {
       let replies = data
       replies.forEach((reply) => {
         // Create each thread
-        document.getElementById("allReplies").innerHTML += "Author: <b><i>" + reply.author + "</i></b> Date: <b><i>" + reply.date + "</i></b> Id: <code>" + reply.id + "</code><br><div id='" + reply.id + "'></div><hr>"
-        document.getElementById(reply.id).innerText = reply.body;
+        document.getElementById("allReplies").innerHTML += "<table><thead><td><b>" + reply.author + "</b></td><td>" + reply.date + "</td><td>#" + reply.id + "</td></thead><tbody><td id='reply-" + reply.id + "'></td></tr></tbody></table>"
+        document.getElementById("reply-" + reply.id).innerText = reply.body;
       })
 
 

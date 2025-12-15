@@ -2,9 +2,17 @@
 <html>
   <head>
     <title>Openchan</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
   <body>
-    <nav id="nav">Openchan - <a href="/">index</a> - <a href="/posts">posts</a> -  <a href="/new">new thread</a> </nav>
+    <nav id="nav">
+      <ul id="navInner">
+        <li><a href="/">Openchan</a></li>
+        <li><a href="/posts">All Posts</a></li>
+        <li style="float:right;"><a href="/new" class="btn">New Thread</a></li>
+      </ul>
+    </nav>
     <main id="main"></main>
     <script src="/js/main.js" type="module"></script>
   </body>
