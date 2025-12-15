@@ -76,4 +76,20 @@ export class Api {
     }
     return output;
   }
+  static async getPosts() {
+    let output = []
+    try {
+      const response = await fetch("/api/getPosts.php", {
+        method: "GET",
+        // Set the FormData instance as the request body
+      }).then(response => response.json()) // Parse the JSON response from the server
+        .then(data => {
+          output = data;
+        })
+    } catch (e) {
+      console.error(e);
+    }
+    return output;
+  }
+
 }

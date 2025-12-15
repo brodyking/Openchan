@@ -33,4 +33,7 @@ export class Pages {
   static async reply() {
     return await this.getStatic("/static/reply.html")
   }
+  static async posts() {
+    return await this.getStatic("/static/posts.html")
+  }
 }

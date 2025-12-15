@@ -21,24 +21,38 @@ switch (url) {
 
   // Individual Thread Page
   case "/thread":
+    if (urlParams.get('id') == undefined) {
+      location.href = "/";
+      break;
+    }
+
     // Get thread page template
     await Pages.thread().then(output => Util.main = output);
+
     // Get thread data from api.
     await Api.getThread(urlParams.get('id')).then((data) => {
 
-      // Set thread metadata
-      document.getElementById("threadAuthor").innerText = data["author"]
-      document.getElementById("threadTitle").innerText = data["title"]
+      if (data.error !== undefined) {
 
-      // Attach link to the reply button
-      document.getElementById("threadReplyBtn").href = "/reply?id=" + data["id"];
+        location.href = "/";
 
-      // Replies
-      let replies = data["replies"]
-      replies.forEach((reply) => {
-        // Create each thread
-        document.getElementById("threadReplies").innerHTML += "Author: <b><i>" + reply.author + "</i></b> Date: <b><i>" + reply.date + "</i></b> Id: <code>" + reply.id + "</code><br>" + reply.body + "<hr>"
-      })
+      } else {
+
+        // Set thread metadata
+        document.getElementById("threadAuthor").innerText = data["author"]
+        document.getElementById("threadTitle").innerText = data["title"]
+
+        // Attach link to the reply button
+        document.getElementById("threadReplyBtn").href = "/reply?id=" + data["id"];
+
+        // Replies
+        let replies = data["replies"]
+        replies.forEach((reply) => {
+          // Create each thread
+          document.getElementById("threadReplies").innerHTML += "Author: <b><i>" + reply.author + "</i></b> Date: <b><i>" + reply.date + "</i></b> Id: <code>" + reply.id + "</code><br><div id='" + reply.id + "'></div><hr>"
+          document.getElementById(reply.id).innerText = reply.body;
+        })
+      }
 
 
     });
@@ -77,9 +91,6 @@ switch (url) {
     // Submit Listener to create a new thread
     document.getElementById("newReplyForm").addEventListener("submit", (event) => {
 
-
-
-
       event.preventDefault();
 
       Api.newReply().then((response) => {
@@ -92,12 +103,29 @@ switch (url) {
 
         console.log(response);
       })
-
-
-
     });
     break;
 
+
+  // All Posts Page
+  case "/posts":
+    // Get thread page template
+    await Pages.posts().then(output => Util.main = output);
+    // Get all post data from api.
+    await Api.getPosts(urlParams.get('id')).then((data) => {
+
+      // Replies
+      let replies = data
+      replies.forEach((reply) => {
+        // Create each thread
+        document.getElementById("allReplies").innerHTML += "Author: <b><i>" + reply.author + "</i></b> Date: <b><i>" + reply.date + "</i></b> Id: <code>" + reply.id + "</code><br><div id='" + reply.id + "'></div><hr>"
+        document.getElementById(reply.id).innerText = reply.body;
+      })
+
+
+    });
+
+    break;
 
   default:
     Util.main = "<h1>Error 404. Page not found.</h1>"

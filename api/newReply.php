@@ -51,6 +51,10 @@ if (isset($data["author"]) && isset($data["body"]) && isset($data["threadId"])) 
 
         $r = $statement->fetch(PDO::FETCH_ASSOC);
 
+        if (!$r) {
+            die();
+        }
+
         $replies = json_decode($r["content"]);
 
         array_push($replies, (int)$post_id);
