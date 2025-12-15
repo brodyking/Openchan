@@ -1,5 +1,8 @@
 # Openchan 💬
-A modern take on imageboard software.
+A modern take on imageboard software. 
+
+> [!NOTE]
+> If you are looking for the classic version with no database, look at the [v1 branch](https://github.com/brodyking/Openchan/tree/v1)
 
 ## Requires
 - PHP (8+)
