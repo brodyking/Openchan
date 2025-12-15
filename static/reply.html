@@ -1,0 +1,63 @@
+
+<h1>Reply</h1>
+<form role="form" id="newReplyForm">
+  <table>
+    <tbody>
+      <tr>
+        <td class="top">
+          Label
+        </td>
+        <td class="top">
+          Input
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Thread #
+        </td>
+        <td>
+          <input type="number" name="title" placeholder="Title" required id="NewReplyId" readonly>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Name*
+        </td>
+        <td>
+          <input type="text" name="author" placeholder="author" value="Anonymous" required id="NewReplyName">
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Post Content*
+        </td>
+        <td>
+          <textarea type="text" name="content" placeholder="Content" required id="newReplyContent"></textarea>
+        </td>
+      </tr>
+
+      <!---
+      <tr>
+        <td>
+          Image Upload
+        </td>
+        <td>
+          <input type="file" name="fileToUpload" id="newThreadImage">
+        </td>
+      </tr>
+      --->
+
+      <tr>
+        <td>
+          Submit
+        </td>
+        <td>
+          <button type="submit" id="newReplySubmit" name="submit">Submit</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>

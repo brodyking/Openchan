@@ -7,7 +7,6 @@ export class Api {
     }
     let output = []
 
-    console.log(JSON.stringify(messageBody))
     try {
       const response = await fetch("/api/newThread.php", {
         method: "POST",
@@ -15,7 +14,6 @@ export class Api {
         body: JSON.stringify(messageBody),
       }).then(response => response.json()) // Parse the JSON response from the server
         .then(data => {
-          console.log('Success:', data); // Handle the success
           output = data;
         })
     } catch (e) {
@@ -37,23 +35,41 @@ export class Api {
     }
     return output
   }
-  static async getThread() {
+  static async getThread(idInput) {
     let messageBody = {
-      id: 1
+      id: idInput
+    }
+    let output = []
+    try {
+      const response = await fetch("/api/getThread.php", {
+        method: "POST",
+        // Set the FormData instance as the request body
+        body: JSON.stringify(messageBody)
+      }).then(response => response.json()) // Parse the JSON response from the server
+        .then(data => {
+          output = data;
+        })
+    } catch (e) {
+      console.error(e);
+    }
+    return output;
+  }
+  static async newReply() {
+    let messageBody = {
+      author: document.getElementById("NewReplyName").value,
+      body: document.getElementById("newReplyContent").value,
+      threadId: document.getElementById("NewReplyId").value
     }
     let output = []
 
-    console.log(JSON.stringify(messageBody))
     try {
-      const response = await fetch("/api/getThread.php", {
+      const response = await fetch("/api/newReply.php", {
         method: "POST",
         // Set the FormData instance as the request body
         body: JSON.stringify(messageBody),
       }).then(response => response.json()) // Parse the JSON response from the server
         .then(data => {
           output = data;
-          output[0]["content"] = JSON.parse(output["content"])
-          console.log('Success:', data); // Handle the success
         })
     } catch (e) {
       console.error(e);

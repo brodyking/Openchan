@@ -8,4 +8,7 @@ export class Util {
   static set main(content) {
     document.getElementById("main").innerHTML = content;
   }
+  static get main() {
+    return document.getElementById("main").innerHTML;
+  }
 }

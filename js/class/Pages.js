@@ -24,10 +24,13 @@ export class Pages {
   static async new() {
     return await this.getStatic("/static/new.html");
   }
-  static async threads() {
-    return await this.getStatic("/static/threads.html");
+  static async index() {
+    return await this.getStatic("/static/index.html");
   }
   static async thread() {
     return await this.getStatic("/static/thread.html")
+  }
+  static async reply() {
+    return await this.getStatic("/static/reply.html")
   }
 }

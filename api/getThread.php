@@ -32,6 +32,10 @@ if (isset($data["id"])) {
         // 4. Fetch all results as an associative array
         $threads = $statement->fetchAll(PDO::FETCH_ASSOC);
 
+        if (!$threads) {
+            echo json_encode(array("error" => true, "errormessage" => "No Thread Found"));
+            die();
+        }
 
         $author = $threads[0]["author"];
         $id = $threads[0]["id"];
@@ -42,10 +46,11 @@ if (isset($data["id"])) {
 
         foreach ($content as $post) {
 
+
             $sql = "SELECT * FROM posts WHERE id=:idInput";
 
             $statement = $db->prepare($sql);
-            $statement->bindValue(":idInput", $data["id"], PDO::PARAM_STR);
+            $statement->bindValue(":idInput", $post, PDO::PARAM_STR);
 
             $statement->execute();
 
@@ -67,7 +72,7 @@ if (isset($data["id"])) {
         // Log the actual error for debugging (e.g., error_log($e->getMessage());)
 
         // Return a generic error message to the client
-        echo json_encode(array("error" => true, "errormessage" => "Database Error: Unable to fetch threads." . $e->getMessage()));
+        echo json_encode(array("error" => true, "errormessage" => "Failed to fatch thread"));
     } finally {
         // 6. Close the connection
         $db = null;

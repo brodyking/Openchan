@@ -34,7 +34,7 @@ try {
     // Log the actual error for debugging (e.g., error_log($e->getMessage());)
 
     // Return a generic error message to the client
-    echo json_encode(array("error" => true, "errormessage" => "Database Error: Unable to fetch threads."));
+    echo json_encode(array("error" => true, "errormessage" => "Failed to fatch threads"));
 } finally {
     // 6. Close the connection
     $db = null;

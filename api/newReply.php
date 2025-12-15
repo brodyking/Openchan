@@ -1,3 +1,4 @@
+
 <?php
 
 // Set the response header to indicate JSON content
@@ -9,7 +10,7 @@ $jsonData = file_get_contents('php://input');
 // Decode the JSON string into a PHP associative array
 $data = json_decode($jsonData, true);
 
-if (isset($data["author"]) && isset($data["body"]) && isset($data["title"])) {
+if (isset($data["author"]) && isset($data["body"]) && isset($data["threadId"])) {
 
     $db = null;
     $content = null;
@@ -39,30 +40,49 @@ if (isset($data["author"]) && isset($data["body"]) && isset($data["title"])) {
         $content = json_encode([(int)$post_id]);
 
 
-        // --- Creating the thread ---
+        // --- Find the thread  ---
 
-        $sql = "INSERT INTO threads (title,author,content) VALUES (:titleInput,:authorInput,:contentInput);";
+        $sql = "SELECT * FROM threads WHERE id=:idInput";
         $statement = $db->prepare($sql);
 
-        $statement->bindValue(":titleInput", $data["title"], PDO::PARAM_STR);
-        $statement->bindValue(":authorInput", $data["author"], PDO::PARAM_STR);
-        $statement->bindValue(":contentInput", $content, PDO::PARAM_STR);
+        $statement->bindValue(":idInput", $data["threadId"], PDO::PARAM_STR);
 
         $statement->execute(); // Throws exception on failure
 
-        $thread_id = $db->lastInsertId();
+        $r = $statement->fetch(PDO::FETCH_ASSOC);
+
+        $replies = json_decode($r["content"]);
+
+        array_push($replies, (int)$post_id);
+
+        $replies = json_encode($replies);
+
+        // --- Replace the value ---
+
+        $sql = "UPDATE threads SET content = :repliesInput WHERE id=:idInput";
+
+        $statement = $db->prepare($sql);
+
+        $statement->bindValue(":idInput", $data["threadId"], PDO::PARAM_STR);
+        $statement->bindValue(":repliesInput", $replies, PDO::PARAM_STR);
+
+        $statement->execute();
+
+        if ($statement) {
+            echo json_encode(array("success" => "Reply Created", "threadid" => $data["threadId"]));
+        } else {
+            echo json_encode(array("error" => true, "errormessage" => "Unknown Error"));
+        }
 
         // 3. COMMIT THE TRANSACTION TO RELEASE THE WRITE LOCK
         $db->commit();
-
-        echo json_encode(array("success" => "Thread Created", "threadid" => $thread_id));
     } catch (PDOException $e) {
         // 4. ROLLBACK ON ERROR
         if ($db && $db->inTransaction()) {
             $db->rollBack();
         }
         // You should log $e->getMessage() for debugging, but return a generic error to the user
-        echo json_encode(array("error" => true, "errormessage" => "Unknown Error"));
+        echo json_encode(array("error" => true, "errormessage" => "Unknown Error" . $e->getMessage()));
     } finally {
         // 5. Close the connection
         $db = null;
