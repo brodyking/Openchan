@@ -53,8 +53,11 @@ switch (url) {
         let replies = data["replies"]
         replies.forEach((reply) => {
           // Create each thread
-          document.getElementById("threadReplies").innerHTML += "<table><thead><td><b>" + reply.author + "</b></td><td>" + reply.date + "</td><td>#" + reply.id + "</td></thead><tbody><td class='replybody' id='reply-" + reply.id + "'></td></tr></tbody></table>"
+          document.getElementById("threadReplies").innerHTML += "<table><thead><td><b>" + reply.author + "</b></td><td>" + reply.date + "</td><td>#" + reply.id + "</td></thead><tbody><tr><td id='reply-img-" + reply.id + "'></td></tr><tr><td class='replybody' id='reply-" + reply.id + "'></td></tr></tbody></table>"
           document.getElementById("reply-" + reply.id).innerText = reply.body;
+          if (reply.img != null) {
+            document.getElementById("reply-img-" + reply.id).innerHTML += "<img class='reply-img' src='/api/" + reply.img + "'/>'";
+          }
         })
       }
 
@@ -70,7 +73,7 @@ switch (url) {
     document.getElementById("newThreadForm").addEventListener("submit", (event) => {
 
       event.preventDefault();
-      Api.newThread().then((response) => {
+      Api.newThread(event).then((response) => {
 
         if (response.success !== undefined) {
           Util.main = Util.main += "<p style='color: lightgreen'>Thread created! <a href='/thread?id=" + response["threadid"] + "'>Click here to visit it</a></p>"

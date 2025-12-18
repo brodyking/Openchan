@@ -25,6 +25,10 @@ main {
   padding: 10px;
 }
 
+.reply-img {
+  max-width: 80%;
+}
+
 h1 {
   text-align: center;
 }
