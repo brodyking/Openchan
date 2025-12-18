@@ -127,10 +127,14 @@ switch (url) {
       let replies = data
       replies.forEach((reply) => {
         // Create each thread
-        document.getElementById("allReplies").innerHTML += "<table><thead><td><b>" + reply.author + "</b></td><td>" + reply.date + "</td><td>#" + reply.id + "</td></thead><tbody><td id='reply-" + reply.id + "'></td></tr></tbody></table>"
+        document.getElementById("allReplies").innerHTML += "<table><thead><td><b>" + reply.author + "</b></td><td>" + reply.date + "</td><td>#" + reply.id + "</td></thead><tbody><tr><td id='reply-img-" + reply.id + "'></td></tr><tr><td class='replybody' id='reply-" + reply.id + "'></td></tr></tbody></table>"
         document.getElementById("reply-" + reply.id).innerText = reply.body;
+        if (reply.img != null) {
+          document.getElementById("reply-img-" + reply.id).innerHTML += "<img class='reply-img' src='/api/" + reply.img + "'/>'";
+        } else {
+          document.getElementById("reply-img-" + reply.id).remove()
+        }
       })
-
 
     });
 
