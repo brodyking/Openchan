@@ -1,9 +1,13 @@
 import { Util } from '/js/class/Util.js'
 import { Pages } from '/js/class/Pages.js'
 import { Api } from "/js/class/Api.js"
+import { Components } from "/js/class/Components.js"
 
 let url = Util.url;
 const urlParams = new URLSearchParams(window.location.search);
+
+// Generate Navigation
+await Components.nav().then(output => Util.nav = output);
 
 switch (url) {
 

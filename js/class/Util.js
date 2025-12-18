@@ -11,4 +11,7 @@ export class Util {
   static get main() {
     return document.getElementById("main").innerHTML;
   }
+  static set nav(content) {
+    document.getElementById("nav").innerHTML = content;
+  }
 }
