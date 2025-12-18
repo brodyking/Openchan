@@ -20,7 +20,7 @@ body {
 }
 
 main {
-  max-width: 1200px;
+  max-width: 1500px;
   margin: auto;
   padding: 10px;
 }
@@ -42,6 +42,14 @@ a:hover {
   text-decoration: none;
 }
 
+.logo {
+  width: 300px;
+  max-width: 100%;
+  margin: auto;
+  display: block;
+  margin-bottom: 30px;
+}
+
 #nav {
   display: block;
   width: 100%;
@@ -60,29 +68,27 @@ a:hover {
 
 #nav>ul>li>a:hover {
   background-color: lab(27.036% 0 0);
-  border-radius: .5rem;
+  border-radius: .75rem;
 }
 
 #nav>ul>li>a {
   text-decoration: none;
-  padding-top: 3px;
-  padding-bottom: 3px;
-  padding-left: 5px;
-  padding-right: 5px;
+  padding: 8px;
+  right: 5px;
   display: inline-block
 }
 
 .btn {
-  border-radius: .5rem;
+  border-radius: .75rem;
   background-color: white;
   color: black;
   border: none;
   font-size: 15px;
-  padding: 5px;
+  padding: 8px;
 }
 
 .btn:hover {
-  border-radius: .5rem;
+  border-radius: .75rem;
   background-color: lightgrey !important;
   color: black;
 }
@@ -93,7 +99,7 @@ h1 {
 }
 
 table {
-  border-radius: .5rem;
+  border-radius: .75rem;
   border: 1px solid lab(100 0 0 / 0.1);
   padding: 0px;
   margin-bottom: 10px;
@@ -121,7 +127,7 @@ textarea {
   background-color: black;
   color: white;
   border: 1px solid lab(100 0 0 / 0.1);
-  border-radius: .5rem;
+  border-radius: .75rem;
   padding: 8px;
 }
 
@@ -144,10 +150,20 @@ textarea {
   display: inline;
 }
 
+#threadTitle {
+  margin-bottom: 0px;
+  display: inline-block;
+}
+
 @media screen and (max-width: 600px) {
   #threadAuthor {
     display: block;
     text-align: center;
     float: center;
+  }
+
+  #threadTitle {
+    text-align: center !important;
+    display: block;
   }
 }
