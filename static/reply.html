@@ -2,7 +2,7 @@
 <h1>Reply</h1>
 <form role="form" id="newReplyForm">
   <table>
-    <tbody>
+    <thead>
       <tr>
         <td class="top">
           Label
@@ -11,13 +11,14 @@
           Input
         </td>
       </tr>
-
+    </thead>
+    <tbody>
       <tr>
         <td>
           Thread #
         </td>
         <td>
-          <input type="number" name="title" placeholder="Title" required id="NewReplyId" readonly>
+          <input type="number" name="title" placeholder="Title" required id="newReplyId" readonly>
         </td>
       </tr>
 
@@ -26,7 +27,7 @@
           Name*
         </td>
         <td>
-          <input type="text" name="author" placeholder="author" value="Anonymous" required id="NewReplyName">
+          <input type="text" name="author" placeholder="author" value="Anonymous" required id="newReplyAuthor">
         </td>
       </tr>
 
@@ -39,7 +40,6 @@
         </td>
       </tr>
 
-      <!---
       <tr>
         <td>
           Image Upload
@@ -48,7 +48,6 @@
           <input type="file" name="fileToUpload" id="newThreadImage">
         </td>
       </tr>
-      --->
 
       <tr>
         <td>

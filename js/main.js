@@ -57,6 +57,8 @@ switch (url) {
           document.getElementById("reply-" + reply.id).innerText = reply.body;
           if (reply.img != null) {
             document.getElementById("reply-img-" + reply.id).innerHTML += "<img class='reply-img' src='/api/" + reply.img + "'/>'";
+          } else {
+            document.getElementById("reply-img-" + reply.id).remove()
           }
         })
       }
@@ -93,7 +95,7 @@ switch (url) {
     // Gets the page
     await Pages.reply().then(output => Util.main = output);
 
-    document.getElementById("NewReplyId").value = urlParams.get("id");
+    document.getElementById("newReplyId").value = urlParams.get("id");
 
     // Submit Listener to create a new thread
     document.getElementById("newReplyForm").addEventListener("submit", (event) => {
