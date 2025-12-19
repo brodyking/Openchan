@@ -11,10 +11,16 @@ let url = Util.url;
 const urlParams = new URLSearchParams(window.location.search);
 
 // Generate Navigation
-await Components.nav().then(output => Util.nav = output);
-// Generate Footer
-await Components.footer().then(output => { Util.footer = output; document.getElementById("footerVersion").innerText = "v" + Config.version });
+await Components.nav().then(output => {
+  Util.nav = output; document.getElementById("navSiteName").innerText = Config.appName
+});
 
+// Generate Footer
+await Components.footer().then(output => {
+  Util.footer = output; document.getElementById("footerVersion").innerText = "v" + Config.version
+});
+
+// Home page; Shows a list of threads
 const index = async () => {
   // Get threads page template
   await Pages.index().then(output => Util.main = output);
@@ -26,6 +32,7 @@ const index = async () => {
   });
 }
 
+// Thread Viewing page. 
 const thread = async () => {
   if (urlParams.get('id') == undefined) {
     location.href = "/";
@@ -72,6 +79,7 @@ const thread = async () => {
   });
 }
 
+// New thread page
 const newThread = async () => {
   // Gets the page
   await Pages.new().then(output => Util.main = output);
@@ -94,6 +102,7 @@ const newThread = async () => {
   });
 }
 
+// Reply page
 const reply = async () => {
   // Gets the page
   await Pages.reply().then(output => Util.main = output);
@@ -118,6 +127,8 @@ const reply = async () => {
   });
 }
 
+
+// All posts page
 const posts = async () => {
   // Get thread page template
   await Pages.posts().then(output => Util.main = output);
@@ -141,6 +152,7 @@ const posts = async () => {
 
 }
 
+// Router
 switch (url) {
 
   // Home Threads Page
