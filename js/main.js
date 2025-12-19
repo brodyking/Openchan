@@ -13,7 +13,7 @@ const urlParams = new URLSearchParams(window.location.search);
 // Generate Navigation
 await Components.nav().then(output => Util.nav = output);
 // Generate Footer
-await Components.footer().then(output => { Util.footer = output; document.getElementById("footer-version").innerText = "v" + Config.version });
+await Components.footer().then(output => { Util.footer = output; document.getElementById("footerVersion").innerText = "v" + Config.version });
 
 const index = async () => {
   // Get threads page template
