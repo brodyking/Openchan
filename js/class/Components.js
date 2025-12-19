@@ -1,8 +1,8 @@
 export class Components {
-  static async nav() {
+  static async getStatic(url) {
     try {
       // 1. Await the fetch call to get the Response object
-      const response = await fetch("/static/nav.html");
+      const response = await fetch(url);
 
       // Check for HTTP errors (e.g., 404, 500)
       if (!response.ok) {
@@ -20,5 +20,11 @@ export class Components {
       // Return a 404 error HTML or null/empty string on failure
       return '<h1>Error loading template. Check console.</h1>';
     }
+  }
+  static async nav() {
+    return await this.getStatic("/static/components/nav.html");
+  }
+  static async footer() {
+    return await this.getStatic("/static/components/footer.html")
   }
 }

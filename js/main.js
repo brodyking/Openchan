@@ -8,6 +8,8 @@ const urlParams = new URLSearchParams(window.location.search);
 
 // Generate Navigation
 await Components.nav().then(output => Util.nav = output);
+// Generate Footer
+await Components.footer().then(output => Util.footer = output);
 
 switch (url) {
 
@@ -82,9 +84,9 @@ switch (url) {
       Api.newThread(event).then((response) => {
 
         if (response.success !== undefined) {
-          Util.main = Util.main += "<p style='color: lightgreen'>Thread created! <a href='/thread?id=" + response["threadid"] + "'>Click here to visit it</a></p>"
+          Util.main = "<p style='color: lightgreen;text-align:center;'>Thread created! <a href='/thread?id=" + response["threadid"] + "'>Click here to visit it</a></p>"
         } else {
-          Util.main = Util.main += "<p style='color: lightred'>An error occoured.</p>"
+          Util.main = "<p style='color: lightred;text-align:center;'>An error occoured.</p>"
         }
 
         console.log(response);
@@ -109,9 +111,9 @@ switch (url) {
       Api.newReply().then((response) => {
 
         if (response.success !== undefined) {
-          Util.main = Util.main += "<p style='color: lightgreen'>Reply created! <a href='/thread?id=" + response["threadid"] + "'>Click here to visit it</a></p>"
+          Util.main = "<p style='color: lightgreen;text-align:center;'>Reply created! <a href='/thread?id=" + response["threadid"] + "'>Click here to visit it</a></p>"
         } else {
-          Util.main = Util.main += "<p style='color: lightred'>An error occoured.</p>"
+          Util.main = "<p style='color: lightred;text-align:center;'>An error occoured.</p>"
         }
 
         console.log(response);

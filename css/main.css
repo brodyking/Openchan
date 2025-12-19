@@ -19,6 +19,7 @@ body {
   font-family: "GeistRegular"
 }
 
+
 main {
   max-width: 1500px;
   margin: auto;
@@ -153,6 +154,20 @@ textarea {
 #threadTitle {
   margin-bottom: 0px;
   display: inline-block;
+}
+
+#footer>p {
+  text-align: center;
+  color: grey;
+}
+
+#footer>p>a {
+  color: grey;
+  text-decoration: none;
+}
+
+#footer>p>a:hover {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 600px) {

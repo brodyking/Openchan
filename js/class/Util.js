@@ -14,4 +14,7 @@ export class Util {
   static set nav(content) {
     document.getElementById("nav").innerHTML = content;
   }
+  static set footer(content) {
+    document.getElementById("footer").innerHTML = content;
+  }
 }
