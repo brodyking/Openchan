@@ -36,4 +36,7 @@ export class Pages {
   static async posts() {
     return await this.getStatic("/static/posts.html")
   }
+  static async error404() {
+    return await this.getStatic("/static/error404.html")
+  }
 }

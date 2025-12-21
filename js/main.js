@@ -1,11 +1,8 @@
 import { Config } from '/js/config.js' // Configuration file
-
 import { Util } from '/js/class/Util.js' // Utility class for changing dom elements and such
 import { Pages } from '/js/class/Pages.js' // All page template getters
 import { Api } from "/js/class/Api.js" // All API methods
 import { Components } from "/js/class/Components.js" // Small components such as Nav and Footer
-
-console.log(Config);
 
 let url = Util.url;
 const urlParams = new URLSearchParams(window.location.search);
@@ -20,6 +17,35 @@ await Components.footer().then(output => {
   Util.footer = output; document.getElementById("footerVersion").innerText = "v" + Config.version
 });
 
+
+// Router
+const main = async () => {
+
+  switch (url) {
+    case "/": // Home Threads Page
+      await index();
+      break;
+    case "/thread": // Individual Thread Page
+      await thread();
+      break;
+    case "/new": // New Thread Page
+      await newThread();
+      break;
+    case "/reply": // Reply Page
+      await reply();
+      break;
+    case "/posts": // All Posts Page
+      await posts();
+      break;
+    default:
+      await error404();
+      break;
+
+  }
+
+}
+
+
 // Home page; Shows a list of threads
 const index = async () => {
   // Get threads page template
@@ -30,6 +56,13 @@ const index = async () => {
       document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td></tr>';
     })
   });
+}
+
+
+// Error 404 Page
+const error404 = async () => {
+  // Get threads page template
+  await Pages.error404().then(output => Util.main = output);
 }
 
 // Thread Viewing page. 
@@ -152,36 +185,4 @@ const posts = async () => {
 
 }
 
-// Router
-switch (url) {
-
-  // Home Threads Page
-  case "/":
-    await index();
-    break;
-
-  // Individual Thread Page
-  case "/thread":
-    await thread();
-    break;
-
-  // New Thread Page
-  case "/new":
-    await newThread();
-    break;
-
-  // Reply Page
-  case "/reply":
-    await reply();
-    break;
-
-  // All Posts Page
-  case "/posts":
-    await posts();
-    break;
-
-  default:
-    Util.main = "<h1>Error 404. Page not found.</h1>"
-    break;
-
-}
+main();
