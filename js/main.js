@@ -36,7 +36,7 @@ const main = async () => {
       await posts();
       break;
     default:
-      await error404();
+      await error404(); // Error 404 Page
       break;
   }
 }
