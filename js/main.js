@@ -137,6 +137,11 @@ const newThread = async () => {
 
 // Reply page
 const reply = async () => {
+
+  if (urlParams.get('id') == undefined) {
+    location.href = "/";
+    return 0;
+  }
   // Gets the page
   await Pages.reply().then(output => Util.main = output);
 
