@@ -17,10 +17,8 @@ await Components.footer().then(output => {
   Util.footer = output; document.getElementById("footerVersion").innerText = "v" + Config.version
 });
 
-
 // Router
 const main = async () => {
-
   switch (url) {
     case "/": // Home Threads Page
       await index();
@@ -40,11 +38,8 @@ const main = async () => {
     default:
       await error404();
       break;
-
   }
-
 }
-
 
 // Home page; Shows a list of threads
 const index = async () => {
@@ -58,7 +53,6 @@ const index = async () => {
   });
 }
 
-
 // Error 404 Page
 const error404 = async () => {
   // Get threads page template
@@ -71,30 +65,21 @@ const thread = async () => {
     location.href = "/";
     return 0;
   }
-
   // Get thread page template
   await Pages.thread().then(output => Util.main = output);
-
   // Get thread data from api.
   await Api.getThread(urlParams.get('id')).then((data) => {
-
     // If there is an error, such as a thread not existing
     if (data.error !== undefined) {
-
       location.href = "/";
-
     } else {
-
       // Set thread metadata
       document.getElementById("threadAuthor").innerText = data["author"]
       document.getElementById("threadTitle").innerText = data["title"]
-
       // Add reply button
       navInner.innerHTML += '<li style="float:right;"><a href="#" id="threadReplyBtn" class="btn">Reply</a></li>'
-
       // Attach link to the reply button
       document.getElementById("threadReplyBtn").href = "/reply?id=" + data["id"];
-
       // Replies
       let replies = data["replies"]
       replies.forEach((reply) => {
@@ -108,7 +93,6 @@ const thread = async () => {
         }
       })
     }
-
   });
 }
 
@@ -118,49 +102,35 @@ const newThread = async () => {
   await Pages.new().then(output => Util.main = output);
   // Submit Listener to create a new thread
   document.getElementById("newThreadForm").addEventListener("submit", (event) => {
-
     event.preventDefault();
     Api.newThread(event).then((response) => {
-
       if (response.success !== undefined) {
         Util.main = "<p style='color: lightgreen;text-align:center;'>Thread created! <a href='/thread?id=" + response["threadid"] + "'>Click here to visit it</a></p>"
       } else {
         Util.main = "<p style='color: lightred;text-align:center;'>An error occoured.</p>"
       }
-
-      console.log(response);
     })
-
-
   });
 }
 
 // Reply page
 const reply = async () => {
-
   if (urlParams.get('id') == undefined) {
     location.href = "/";
     return 0;
   }
   // Gets the page
   await Pages.reply().then(output => Util.main = output);
-
   document.getElementById("newReplyId").value = urlParams.get("id");
-
   // Submit Listener to create a new thread
   document.getElementById("newReplyForm").addEventListener("submit", (event) => {
-
     event.preventDefault();
-
     Api.newReply().then((response) => {
-
       if (response.success !== undefined) {
         Util.main = "<p style='color: lightgreen;text-align:center;'>Reply created! <a href='/thread?id=" + response["threadid"] + "'>Click here to visit it</a></p>"
       } else {
         Util.main = "<p style='color: lightred;text-align:center;'>An error occoured.</p>"
       }
-
-      console.log(response);
     })
   });
 }
@@ -172,7 +142,6 @@ const posts = async () => {
   await Pages.posts().then(output => Util.main = output);
   // Get all post data from api.
   await Api.getPosts(urlParams.get('id')).then((data) => {
-
     // Replies
     let replies = data
     replies.forEach((reply) => {
@@ -185,9 +154,7 @@ const posts = async () => {
         document.getElementById("reply-img-" + reply.id).remove()
       }
     })
-
   });
-
 }
 
 main();
