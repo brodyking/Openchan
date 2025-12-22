@@ -100,6 +100,9 @@ const thread = async () => {
 const newThread = async () => {
   // Gets the page
   await Pages.new().then(output => Util.main = output);
+
+  Config.boards.forEach((board) => document.getElementById("newThreadBoard").innerHTML += "<option value='" + board + "'>/" + board + "/</option>")
+
   // Submit Listener to create a new thread
   document.getElementById("newThreadForm").addEventListener("submit", (event) => {
     event.preventDefault();

@@ -4,5 +4,8 @@ export const Config = {
   permissions: {
     fileUpload: true,
     threadCreation: true
-  }
+  },
+  boards: [
+    "meta"
+  ]
 }
