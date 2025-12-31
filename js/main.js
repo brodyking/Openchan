@@ -6,6 +6,10 @@ import { Components } from "/js/class/Components.js" // Small components such as
 
 let url = Util.url;
 const urlParams = new URLSearchParams(window.location.search);
+// Cuts off trailing slashes
+if (url !== "/" && url.charAt(url.length - 1) == "/") {
+  url = url.substr(0, url.length - 1);
+}
 
 // Generate Navigation
 await Components.nav().then(output => {
@@ -22,6 +26,12 @@ const main = async () => {
   switch (url) {
     case "/": // Home Threads Page
       await index();
+      break;
+    case "/threads":
+      await threads();
+      break;
+    case "/meta":
+      await meta();
       break;
     case "/thread": // Individual Thread Page
       await thread();
@@ -41,12 +51,32 @@ const main = async () => {
   }
 }
 
-// Home page; Shows a list of threads
+// Shows all threads across all boards
+const threads = async () => {
+  // Get threads page template
+  await Pages.threads().then(output => Util.main = output);
+  // Populate thread list
+  await Api.getThreadList().then((output) => {
+    output.forEach((element) => {
+      document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td></tr>';
+    })
+  });
+}
+
+// Site homepage that shows list of boards
 const index = async () => {
   // Get threads page template
   await Pages.index().then(output => Util.main = output);
+  Config.boards.forEach((board) => {
+    document.getElementById("boardsBody").innerHTML += '<tr><td><a href="/' + board + '/">/' + board + '/</a></td></tr>';
+  })
+}
+// Shows the meta board
+const meta = async () => {
+  // Get threads page template
+  await Pages.meta().then(output => Util.main = output);
   // Populate thread list
-  await Api.getThreadList().then((output) => {
+  await Api.getBoardList("meta").then((output) => {
     output.forEach((element) => {
       document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td></tr>';
     })
