@@ -133,7 +133,8 @@ textarea {
   padding: 8px;
 }
 
-#threadsTable {
+#threadsTable,
+#boardsTable {
   width: 100%;
 }
 
