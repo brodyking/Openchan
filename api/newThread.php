@@ -3,7 +3,7 @@
 // Set the response header to indicate JSON content
 header('Content-Type: application/json');
 
-if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"])) {
+if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) && isset($_POST["board"])) {
 
     $db = null;
     $content = null;
@@ -85,6 +85,38 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"])) 
         $statement->execute(); // Throws exception on failure
 
         $thread_id = $db->lastInsertId();
+
+        // --- Get board ---
+
+        $sql = "SELECT * FROM boards WHERE title=:boardInput";
+        $statement = $db->prepare($sql);
+
+        $statement->bindValue(":boardInput", $_POST["board"], PDO::PARAM_STR);
+
+        $statement->execute();
+
+        $r = $statement->fetch(PDO::FETCH_ASSOC);
+
+        if (!$r) {
+            die();
+        }
+
+        $threads = json_decode($r["threads"]);
+
+        array_push($threads, (int)$thread_id);
+
+        $threads = json_encode($threads);
+
+        // --- Add thread to board ---
+
+        $sql = "UPDATE boards SET threads = :threadsInput WHERE title=:boardInput";
+        $statement = $db->prepare($sql);
+
+        $statement->bindValue(":threadsInput", $threads, PDO::PARAM_STR);
+        $statement->bindValue(":boardInput", $_POST["board"], PDO::PARAM_STR);
+
+        $statement->execute(); // Throws exception on failure
+
 
         // 3. COMMIT THE TRANSACTION TO RELEASE THE WRITE LOCK
         $db->commit();
