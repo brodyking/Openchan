@@ -94,6 +94,10 @@ a:hover {
   color: black;
 }
 
+.btn>i {
+  margin-right: 3px;
+}
+
 h1 {
   font-family: "GeistSemiBold";
   font-size: 36px;
