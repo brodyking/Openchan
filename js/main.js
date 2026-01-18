@@ -6,6 +6,7 @@ import { Components } from "/js/class/Components.js" // Small components such as
 
 let url = Util.url;
 const urlParams = new URLSearchParams(window.location.search);
+
 // Cuts off trailing slashes
 if (url !== "/" && url.charAt(url.length - 1) == "/") {
   url = url.substr(0, url.length - 1);
@@ -26,6 +27,9 @@ const main = async () => {
   switch (url) {
     case "/": // Home Threads Page
       await index();
+      break;
+    case "/login":
+      await login();
       break;
     case "/threads":
       await threads();
@@ -68,7 +72,7 @@ const index = async () => {
   // Get threads page template
   await Pages.index().then(output => Util.main = output);
   Config.boards.forEach((board) => {
-    document.getElementById("boardsBody").innerHTML += '<tr><td><a href="/' + board + '/">/' + board + '/</a></td></tr>';
+    document.getElementById("boardsBody").innerHTML += '<tr><td><a href="/' + board[0] + '/">/' + board[0] + '/</a></td><td>' + board[1] + '</td></tr>';
   })
 }
 // Shows the meta board
@@ -106,6 +110,8 @@ const thread = async () => {
       // Set thread metadata
       document.getElementById("threadAuthor").innerText = data["author"]
       document.getElementById("threadTitle").innerText = data["title"]
+      // Set page title to the thread name
+      Util.title = data["title"];
       // Add reply button
       navInner.innerHTML += '<li style="float:right;"><a href="#" id="threadReplyBtn" class="btn">Reply</a></li>'
       // Attach link to the reply button
@@ -131,7 +137,7 @@ const newThread = async () => {
   // Gets the page
   await Pages.new().then(output => Util.main = output);
 
-  Config.boards.forEach((board) => document.getElementById("newThreadBoard").innerHTML += "<option value='" + board + "'>/" + board + "/</option>")
+  Config.boards.forEach((board) => document.getElementById("newThreadBoard").innerHTML += "<option value='" + board[0] + "'>/" + board[0] + "/</option>")
 
   // Submit Listener to create a new thread
   document.getElementById("newThreadForm").addEventListener("submit", (event) => {
@@ -144,6 +150,13 @@ const newThread = async () => {
       }
     })
   });
+}
+
+// Login page
+const login = async () => {
+  // Gets the page
+  await Pages.login().then(output => Util.main = output);
+
 }
 
 // Reply page

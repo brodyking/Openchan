@@ -1,6 +1,12 @@
+import { Config } from '/js/config.js'
+
 export class Util {
   static set title(newtitle) {
-    document.title = newtitle
+    if (newtitle == "") {
+      document.title = Config.appName;
+    } else {
+      document.title = newtitle + " - " + Config.appName;
+    }
   }
   static get url() {
     return location.pathname

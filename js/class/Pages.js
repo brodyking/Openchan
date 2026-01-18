@@ -1,3 +1,5 @@
+import { Util } from './Util.js'
+
 export class Pages {
   static async getStatic(url) {
     try {
@@ -22,27 +24,39 @@ export class Pages {
     }
   }
   static async new() {
+    Util.title = "New Thread";
     return await this.getStatic("/static/new.html");
   }
+  static async login() {
+    Util.title = "Login"
+    return await this.getStatic("/static/login.html")
+  }
   static async meta() {
+    Util.title = "Meta"
     return await this.getStatic("/static/meta.html");
   }
   static async index() {
+    Util.title = ""
     return await this.getStatic("/static/index.html");
   }
   static async threads() {
+    Util.title = "All Threads"
     return await this.getStatic("/static/threads.html");
   }
   static async thread() {
+    Util.title = "Thread"
     return await this.getStatic("/static/thread.html")
   }
   static async reply() {
+    Util.title = "Reply"
     return await this.getStatic("/static/reply.html")
   }
   static async posts() {
+    Util.title = "Posts"
     return await this.getStatic("/static/posts.html")
   }
   static async error404() {
+    Util.title = "Error 404"
     return await this.getStatic("/static/error404.html")
   }
 }
