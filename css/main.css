@@ -139,7 +139,8 @@ textarea {
 }
 
 #newThreadForm,
-#newReplyForm {
+#newReplyForm,
+#loginForm {
   max-width: 600px;
   margin: auto;
 }
