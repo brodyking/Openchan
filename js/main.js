@@ -113,7 +113,7 @@ const thread = async () => {
       // Set page title to the thread name
       Util.title = data["title"];
       // Add reply button
-      navInner.innerHTML += '<li style="float:right;"><a href="#" id="threadReplyBtn" class="btn">Reply</a></li>'
+      navInner.innerHTML += '<li style="float:right;"><a href="#" id="threadReplyBtn" class="btn"><i class="bi bi-reply-all-fill"></i> Reply</a></li>'
       // Attach link to the reply button
       document.getElementById("threadReplyBtn").href = "/reply?id=" + data["id"];
       // Replies
