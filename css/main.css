@@ -127,6 +127,7 @@ table>tbody {
 }
 
 input[type=text],
+input[type=password],
 input[type=number],
 select,
 textarea {
@@ -145,6 +146,13 @@ textarea {
 #newThreadForm,
 #newReplyForm,
 #loginForm {
+  max-width: 600px;
+  margin: auto;
+}
+
+#newThreadForm>table,
+#newReplyForm>table,
+#loginForm>table {
   max-width: 600px;
   margin: auto;
 }
