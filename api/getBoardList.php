@@ -42,7 +42,7 @@ if (isset($_POST["board"])) {
             $r = $statement->fetch(PDO::FETCH_ASSOC);
             array_push($threadsout, $r);
         }
-        echo json_encode($threadsout);
+        echo json_encode(array_reverse($threadsout));
     } catch (PDOException $e) {
         // Log the actual error for debugging (e.g., error_log($e->getMessage());)
 
