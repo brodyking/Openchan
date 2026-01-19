@@ -92,6 +92,7 @@ a:hover {
   border-radius: .75rem;
   background-color: lightgrey !important;
   color: black;
+  cursor: pointer;
 }
 
 .btn>i {
