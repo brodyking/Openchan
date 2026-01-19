@@ -45,12 +45,12 @@ export class Api {
     }
     return output
   }
-  static async getBoardList(board) {
+  static async getThreadsFromBoard(board) {
     const formData = new FormData();
     formData.append("board", board);
     let output = []
     try {
-      const response = await fetch("/api/getBoardList.php", {
+      const response = await fetch("/api/getThreadsFromBoard.php", {
         method: "POST",
         body: formData
       }).then(response => response.json()) // Parse the JSON response from the server

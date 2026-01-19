@@ -80,7 +80,7 @@ const meta = async () => {
   // Get threads page template
   await Pages.meta().then(output => Util.main = output);
   // Populate thread list
-  await Api.getBoardList("meta").then((output) => {
+  await Api.getThreadsFromBoard("meta").then((output) => {
     output.forEach((element) => {
       document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td><td>' + element.date + '</tr>';
     })
