@@ -31,10 +31,10 @@ export class Api {
     }
     return output;
   }
-  static async getThreadList() {
+  static async getThreadsAll() {
     let output = []
     try {
-      const response = await fetch("/api/getThreadList.php", {
+      const response = await fetch("/api/getThreadsAll.php", {
         method: "GET",
       }).then(response => response.json()) // Parse the JSON response from the server
         .then(data => {

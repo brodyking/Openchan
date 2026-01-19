@@ -60,7 +60,7 @@ const threads = async () => {
   // Get threads page template
   await Pages.threads().then(output => Util.main = output);
   // Populate thread list
-  await Api.getThreadList().then((output) => {
+  await Api.getThreadsAll().then((output) => {
     output.forEach((element) => {
       document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td></tr>';
     })
