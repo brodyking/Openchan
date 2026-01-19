@@ -1,3 +1,8 @@
+<?php
+if (!isset($username)) {
+    die();
+}
+?>
 <h1>Openchan API + Sys</h1>
 
 <!-- Account Information Post -->
