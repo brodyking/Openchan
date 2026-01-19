@@ -27,10 +27,6 @@ export class Pages {
     Util.title = "New Thread";
     return await this.getStatic("/static/new.html");
   }
-  static async login() {
-    Util.title = "Login"
-    return await this.getStatic("/static/login.html")
-  }
   static async meta() {
     Util.title = "Meta"
     return await this.getStatic("/static/meta.html");

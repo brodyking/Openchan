@@ -28,9 +28,6 @@ const main = async () => {
     case "/": // Home Threads Page
       await index();
       break;
-    case "/login":
-      await login();
-      break;
     case "/threads":
       await threads();
       break;
@@ -150,13 +147,6 @@ const newThread = async () => {
       }
     })
   });
-}
-
-// Login page
-const login = async () => {
-  // Gets the page
-  await Pages.login().then(output => Util.main = output);
-
 }
 
 // Reply page
