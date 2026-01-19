@@ -82,7 +82,7 @@ const meta = async () => {
   // Populate thread list
   await Api.getBoardList("meta").then((output) => {
     output.forEach((element) => {
-      document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td></tr>';
+      document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td><td>' + element.date + '</tr>';
     })
   });
 }

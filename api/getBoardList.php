@@ -35,7 +35,7 @@ if (isset($_POST["board"])) {
 
 
         foreach ($threads as $thread) {
-            $sql = "SELECT id, title, author, content FROM threads WHERE id=:idInput";
+            $sql = "SELECT id, title, author, content, date FROM threads WHERE id=:idInput";
             $statement = $db->prepare($sql);
             $statement->bindValue(":idInput", (int)$thread, PDO::PARAM_INT);
             $statement->execute();
