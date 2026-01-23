@@ -1,9 +1,16 @@
+
 <?php
 
 // Set the response header to indicate JSON content
 header('Content-Type: application/json');
 
-if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) && isset($_POST["board"])) {
+include "auth.php";
+
+if (!isSignedIn()) {
+    die();
+}
+
+if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["threadId"])) {
 
     $db = null;
     $content = null;
@@ -35,7 +42,7 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) &
         // 2. Validate for errors
         if ($file['error'] === UPLOAD_ERR_OK) {
             // 3. Move the file from temp storage to your folder
-            if (move_uploaded_file($file['tmp_name'], $target_path)) {
+            if (move_uploaded_file($file['tmp_name'], "../" . $target_path)) {
                 $imgpath = $target_path;
             } else {
                 echo json_encode(array("error" => true, "errormessage" => "Image upload failed"));
@@ -49,7 +56,7 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) &
 
     try {
         // 1. USE A SINGLE CONNECTION FOR BOTH OPERATIONS
-        $db = new PDO("sqlite:" . "database/main.db");
+        $db = new PDO("sqlite:" . "../database/main.db");
         // Optional: Set PDO to throw exceptions on error, which simplifies error handling
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -65,7 +72,7 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) &
         $statement->bindValue(":bodyInput", $_POST["body"], PDO::PARAM_STR);
         $statement->bindValue(":dateInput", date("m/d/Y"), PDO::PARAM_STR);
         $statement->bindValue(":imgInput", $imgpath, PDO::PARAM_STR);
-        $statement->bindValue(":roleInput", "user", PDO::PARAM_STR);
+        $statement->bindValue(":roleInput", "admin", PDO::PARAM_STR);
 
         $statement->execute(); // Throws exception on failure due to ATTR_ERRMODE
 
@@ -74,63 +81,54 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) &
         $content = json_encode([(int)$post_id]);
 
 
-        // --- Creating the thread ---
+        // --- Find the thread  ---
 
-        $sql = "INSERT INTO threads (title,author,content,date) VALUES (:titleInput,:authorInput,:contentInput, :dateInput)";
+        $sql = "SELECT * FROM threads WHERE id=:idInput";
         $statement = $db->prepare($sql);
 
-        $statement->bindValue(":titleInput", $_POST["title"], PDO::PARAM_STR);
-        $statement->bindValue(":authorInput", $_POST["author"], PDO::PARAM_STR);
-        $statement->bindValue(":contentInput", $content, PDO::PARAM_STR);
-        $statement->bindValue(":dateInput", date("m/d/Y"), PDO::PARAM_STR);
+        $statement->bindValue(":idInput", $_POST["threadId"], PDO::PARAM_STR);
 
         $statement->execute(); // Throws exception on failure
-
-        $thread_id = $db->lastInsertId();
-
-        // --- Get board ---
-
-        $sql = "SELECT * FROM boards WHERE title=:boardInput";
-        $statement = $db->prepare($sql);
-
-        $statement->bindValue(":boardInput", $_POST["board"], PDO::PARAM_STR);
-
-        $statement->execute();
 
         $r = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (!$r) {
+            echo json_encode(array("error" => true, "errormessage" => "Cannot reply to non-existant thread."));
             die();
         }
 
-        $threads = json_decode($r["threads"]);
+        $replies = json_decode($r["content"]);
 
-        array_push($threads, (int)$thread_id);
+        array_push($replies, (int)$post_id);
 
-        $threads = json_encode($threads);
+        $replies = json_encode($replies);
 
-        // --- Add thread to board ---
+        // --- Replace the value ---
 
-        $sql = "UPDATE boards SET threads = :threadsInput WHERE title=:boardInput";
+        $sql = "UPDATE threads SET content = :repliesInput WHERE id=:idInput";
+
         $statement = $db->prepare($sql);
 
-        $statement->bindValue(":threadsInput", $threads, PDO::PARAM_STR);
-        $statement->bindValue(":boardInput", $_POST["board"], PDO::PARAM_STR);
+        $statement->bindValue(":idInput", $_POST["threadId"], PDO::PARAM_STR);
+        $statement->bindValue(":repliesInput", $replies, PDO::PARAM_STR);
 
-        $statement->execute(); // Throws exception on failure
+        $statement->execute();
 
+        if ($statement) {
+            echo json_encode(array("success" => "Reply Created", "threadid" => $_POST["threadId"]));
+        } else {
+            echo json_encode(array("error" => true, "errormessage" => "Unknown Error"));
+        }
 
         // 3. COMMIT THE TRANSACTION TO RELEASE THE WRITE LOCK
         $db->commit();
-
-        echo json_encode(array("success" => "Thread Created", "threadid" => $thread_id));
     } catch (PDOException $e) {
         // 4. ROLLBACK ON ERROR
         if ($db && $db->inTransaction()) {
             $db->rollBack();
         }
         // You should log $e->getMessage() for debugging, but return a generic error to the user
-        echo json_encode(array("error" => true, "errormessage" => "Unknown Error"));
+        echo json_encode(array("error" => true, "errormessage" => "Unknown Error" . $e->getMessage()));
     } finally {
         // 5. Close the connection
         $db = null;

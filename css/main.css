@@ -116,6 +116,7 @@ table>tbody>tr>td {
   padding: 5px;
 }
 
+
 table>thead>tr>td {
   color: white;
   border-bottom: 1px solid lab(100 0 0 / 0.1);
@@ -197,4 +198,8 @@ textarea {
     text-align: center !important;
     display: block;
   }
+}
+
+.admin {
+  color: lightcoral;
 }

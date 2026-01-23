@@ -3,6 +3,12 @@
 // Set the response header to indicate JSON content
 header('Content-Type: application/json');
 
+include "auth.php";
+
+if (!isSignedIn()) {
+    die();
+}
+
 if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) && isset($_POST["board"])) {
 
     $db = null;
@@ -35,7 +41,7 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) &
         // 2. Validate for errors
         if ($file['error'] === UPLOAD_ERR_OK) {
             // 3. Move the file from temp storage to your folder
-            if (move_uploaded_file($file['tmp_name'], $target_path)) {
+            if (move_uploaded_file($file['tmp_name'], "../" . $target_path)) {
                 $imgpath = $target_path;
             } else {
                 echo json_encode(array("error" => true, "errormessage" => "Image upload failed"));
@@ -49,7 +55,7 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) &
 
     try {
         // 1. USE A SINGLE CONNECTION FOR BOTH OPERATIONS
-        $db = new PDO("sqlite:" . "database/main.db");
+        $db = new PDO("sqlite:" . "../database/main.db");
         // Optional: Set PDO to throw exceptions on error, which simplifies error handling
         $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
@@ -65,7 +71,7 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) &
         $statement->bindValue(":bodyInput", $_POST["body"], PDO::PARAM_STR);
         $statement->bindValue(":dateInput", date("m/d/Y"), PDO::PARAM_STR);
         $statement->bindValue(":imgInput", $imgpath, PDO::PARAM_STR);
-        $statement->bindValue(":roleInput", "user", PDO::PARAM_STR);
+        $statement->bindValue(":roleInput", "admin", PDO::PARAM_STR);
 
         $statement->execute(); // Throws exception on failure due to ATTR_ERRMODE
 

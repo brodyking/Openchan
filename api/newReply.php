@@ -59,13 +59,14 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["threadId"]
 
         // --- Creating the post ---
 
-        $sql = "INSERT INTO posts (author,body,date,img) VALUES (:authorInput,:bodyInput,:dateInput,:imgInput);";
+        $sql = "INSERT INTO posts (author,body,date,img,role) VALUES (:authorInput,:bodyInput,:dateInput,:imgInput,:roleInput);";
         $statement = $db->prepare($sql);
 
         $statement->bindValue(":authorInput", $_POST["author"], PDO::PARAM_STR);
         $statement->bindValue(":bodyInput", $_POST["body"], PDO::PARAM_STR);
         $statement->bindValue(":dateInput", date("m/d/Y"), PDO::PARAM_STR);
         $statement->bindValue(":imgInput", $imgpath, PDO::PARAM_STR);
+        $statement->bindValue(":roleInput", "user", PDO::PARAM_STR);
 
         $statement->execute(); // Throws exception on failure due to ATTR_ERRMODE
 

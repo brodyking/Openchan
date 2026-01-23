@@ -28,7 +28,7 @@ if (!isset($username)) {
 <table style="width: 100%;max-width: 600px; margin:auto;margin-bottom:20px;">
     <thead>
         <tr>
-            <td>Delete Thread</td>
+            <td>Delete Thread (UNFINISHED)</td>
         </tr>
     </thead>
     <tbody>
@@ -52,7 +52,7 @@ if (!isset($username)) {
 <table style="width: 100%;max-width: 600px; margin:auto;margin-bottom:20px;">
     <thead>
         <tr>
-            <td>Delete Post</td>
+            <td>Delete Post (UNFINISHED)</td>
         </tr>
     </thead>
     <tbody>
@@ -115,7 +115,7 @@ if (!isset($username)) {
                                     Name*
                                 </td>
                                 <td>
-                                    <input type="text" name="author" placeholder="author" value="Admin" required id="newReplyAuthor">
+                                    <input type="text" name="author" placeholder="author" value="Anonymous" required id="newReplyAuthor">
                                 </td>
                             </tr>
 
@@ -158,7 +158,7 @@ if (!isset($username)) {
 <table style="width: 100%;max-width: 600px; margin:auto;margin-bottom:20px;">
     <thead>
         <tr>
-            <td>Admin Post</td>
+            <td>Admin Post (UNFINISHED)</td>
         </tr>
     </thead>
     <tbody>
@@ -197,9 +197,7 @@ if (!isset($username)) {
                                     Board*
                                 </td>
                                 <td>
-                                    <select name="board" id="newThreadBoard" required>
-                                        <option value="">Select a board</option>
-                                    </select>
+                                    <input type="text" name="author" placeholder="board" value="" required id="newThreadBoard">
                                 </td>
                             </tr>
 
@@ -208,7 +206,7 @@ if (!isset($username)) {
                                     Name*
                                 </td>
                                 <td>
-                                    <input type="text" name="author" placeholder="author" value="Admin" required id="newThreadAuthor">
+                                    <input type="text" name="author" placeholder="author" value="Anonymous" required id="newThreadAuthor">
                                 </td>
                             </tr>
 
@@ -246,3 +244,77 @@ if (!isset($username)) {
         </tr>
     </tbody>
 </table>
+<script>
+    async function newReply() {
+
+        const formData = new FormData();
+
+        // Image input
+        const imgInput = document.getElementById("newThreadImage");
+        if (imgInput != '') {
+            const img = imgInput.files[0];
+            formData.append("img", img);
+        }
+
+        formData.append("author", document.getElementById("newReplyAuthor").value);
+        formData.append("body", document.getElementById("newReplyContent").value);
+        formData.append("threadId", document.getElementById("newReplyId").value);
+
+        let output = []
+
+        try {
+            const response = await fetch("/api/sys/adminReply.php", {
+                    method: "POST",
+                    // Set the FormData instance as the request body
+                    body: formData,
+                }).then(response => response.json()) // Parse the JSON response from the server
+                .then(data => {
+                    output = data;
+                })
+        } catch (e) {
+            console.error(e);
+        }
+        return output;
+    }
+    async function newThread(event) {
+
+        const formData = new FormData();
+
+        // Image input
+        const imgInput = document.getElementById("newThreadImage");
+        if (imgInput != '') {
+            const img = imgInput.files[0];
+            formData.append("img", img);
+        }
+
+        formData.append("author", document.getElementById("newThreadAuthor").value);
+        formData.append("board", document.getElementById("newThreadBoard").value);
+        formData.append("body", document.getElementById("newThreadContent").value);
+        formData.append("title", document.getElementById("newThreadTitle").value);
+
+        let output = []
+
+        try {
+            const response = await fetch("/api/sys/adminThread.php", {
+                    method: "POST",
+                    // Set the FormData instance as the request body
+                    body: formData
+                }).then(response => response.json()) // Parse the JSON response from the server
+                .then(data => {
+                    output = data;
+                })
+        } catch (e) {
+            console.error(e);
+        }
+        return output;
+    }
+    document.getElementById("newReplyForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        newReply().then(alert("Reply Sent"));
+    });
+
+    document.getElementById("newThreadForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        newThread().then(alert("Thread Sent"));
+    });
+</script>

@@ -118,6 +118,10 @@ const thread = async () => {
       let replies = data["replies"]
       replies.forEach((reply) => {
         // Create each thread
+        console.log(reply.role);
+        if (reply.role == "admin") {
+          reply.author = "<span class='admin'>## Admin ##</span> " + reply.author;
+        }
         document.getElementById("threadReplies").innerHTML += "<table><thead><td><b>" + reply.author + "</b></td><td>" + reply.date + "</td><td>#" + reply.id + "</td></thead><tbody><tr><td id='reply-img-" + reply.id + "'></td></tr><tr><td class='replybody' id='reply-" + reply.id + "'></td></tr></tbody></table>"
         document.getElementById("reply-" + reply.id).innerText = reply.body;
         if (reply.img != null) {
