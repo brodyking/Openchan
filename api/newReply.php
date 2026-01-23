@@ -86,6 +86,7 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["threadId"]
         $r = $statement->fetch(PDO::FETCH_ASSOC);
 
         if (!$r) {
+            echo json_encode(array("error" => true, "errormessage" => "Cannot reply to non-existant thread."));
             die();
         }
 

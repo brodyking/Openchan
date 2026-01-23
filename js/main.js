@@ -79,7 +79,8 @@ const meta = async () => {
   // Populate thread list
   await Api.getThreadsFromBoard("meta").then((output) => {
     output.forEach((element) => {
-      document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td><td>' + element.date + '</tr>';
+      console.log(JSON.parse(element.content));
+      document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td><td>' + JSON.parse(element.content).length + '</td><td>' + element.date + '</tr>';
     })
   });
 }
@@ -143,7 +144,7 @@ const newThread = async () => {
       if (response.success !== undefined) {
         Util.main = "<p style='color: lightgreen;text-align:center;'>Thread created! <a href='/thread?id=" + response["threadid"] + "'>Click here to visit it</a></p>"
       } else {
-        Util.main = "<p style='color: lightred;text-align:center;'>An error occoured.</p>"
+        Util.main = "<p style='color: lightred;text-align:center;'>" + response.errormessage + "</p>"
       }
     })
   });
@@ -165,7 +166,7 @@ const reply = async () => {
       if (response.success !== undefined) {
         Util.main = "<p style='color: lightgreen;text-align:center;'>Reply created! <a href='/thread?id=" + response["threadid"] + "'>Click here to visit it</a></p>"
       } else {
-        Util.main = "<p style='color: lightred;text-align:center;'>An error occoured.</p>"
+        Util.main = "<p style='color: lightred;text-align:center;'>" + response.errormessage + "</p>"
       }
     })
   });
