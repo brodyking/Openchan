@@ -13,6 +13,10 @@ If you are looking for a more "feature-rich" imageboard software, I would advise
 you to checkout [vichan](https://github.com/vichan-devel/vichan). It is a proven
 imageboard software also written in PHP with active development.
 
+> [!WARNING]
+> This software is in development. Review the codebase before use. Some
+> functions may be insecure.
+
 ## User Features
 
 - Thread Creation
@@ -48,4 +52,4 @@ git clone https:/github.com/brodyking/openchan
 - [x] Replies
 - [x] Image uploading
 - [x] Boards
-- [ ] Admin panel
+- [x] Admin panel
