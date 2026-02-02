@@ -59,7 +59,10 @@ const threads = async () => {
   // Populate thread list
   await Api.getThreadsAll().then((output) => {
     output.forEach((element) => {
-      document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td></tr>';
+      if (element.role == "admin") {
+        element.author = "<span class='admin'>## Admin ##</span> " + element.author;
+      }
+      document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td><td>' + JSON.parse(element.content).length + '</td><td>' + element.date + '</td></tr>';
     })
   });
 }
@@ -80,6 +83,9 @@ const meta = async () => {
   await Api.getThreadsFromBoard("meta").then((output) => {
     output.forEach((element) => {
       console.log(JSON.parse(element.content));
+      if (element.role == "admin") {
+        element.author = "<span class='admin'>## Admin ##</span> " + element.author;
+      }
       document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td><td>' + JSON.parse(element.content).length + '</td><td>' + element.date + '</tr>';
     })
   });
@@ -108,6 +114,10 @@ const thread = async () => {
       // Set thread metadata
       document.getElementById("threadAuthor").innerText = data["author"]
       document.getElementById("threadTitle").innerText = data["title"]
+      // If thread is creatd by an admin
+      if (data.role == "admin") {
+        document.getElementById("threadAuthor").innerHTML = "<span class='admin'>## Admin ##</span> " + data["author"]
+      }
       // Set page title to the thread name
       Util.title = data["title"];
       // Add reply button

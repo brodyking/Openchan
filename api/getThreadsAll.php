@@ -12,7 +12,7 @@ try {
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // Set error mode for reliable exception handling
 
     // 2. Prepare the SQL statement to select all columns and rows from the threads table
-    $sql = "SELECT id, title, author, content FROM threads ORDER BY id DESC;";
+    $sql = "SELECT id, title, author, content, date, role FROM threads ORDER BY id DESC;";
 
     $statement = $db->prepare($sql);
 

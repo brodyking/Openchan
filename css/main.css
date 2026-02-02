@@ -202,4 +202,6 @@ textarea {
 
 .admin {
   color: lightcoral;
+  font-style: normal;
+  font-weight: bold;
 }

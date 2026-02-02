@@ -38,6 +38,7 @@ if (isset($data["id"])) {
         }
 
         $author = $threads[0]["author"];
+        $role = $threads[0]["role"];
         $id = $threads[0]["id"];
         $title = $threads[0]["title"];
         $content = json_decode($threads[0]["content"]);
@@ -63,7 +64,8 @@ if (isset($data["id"])) {
             "author" => $author,
             "id" => $id,
             "title" => $title,
-            "replies" => $replies
+            "replies" => $replies,
+            "role" => $role
         );
 
         echo json_encode($output);

@@ -82,13 +82,14 @@ if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) &
 
         // --- Creating the thread ---
 
-        $sql = "INSERT INTO threads (title,author,content,date) VALUES (:titleInput,:authorInput,:contentInput, :dateInput)";
+        $sql = "INSERT INTO threads (title,author,content,date,role) VALUES (:titleInput,:authorInput,:contentInput, :dateInput, :roleInput)";
         $statement = $db->prepare($sql);
 
         $statement->bindValue(":titleInput", $_POST["title"], PDO::PARAM_STR);
         $statement->bindValue(":authorInput", $_POST["author"], PDO::PARAM_STR);
         $statement->bindValue(":contentInput", $content, PDO::PARAM_STR);
         $statement->bindValue(":dateInput", date("m/d/Y"), PDO::PARAM_STR);
+        $statement->bindValue(":roleInput", "admin", PDO::PARAM_STR);
 
         $statement->execute(); // Throws exception on failure
 
