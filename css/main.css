@@ -200,7 +200,8 @@ textarea {
   }
 }
 
-.admin {
+.admin,
+.deleted {
   color: lightcoral;
   font-style: normal;
   font-weight: bold;

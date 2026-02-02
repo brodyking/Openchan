@@ -28,7 +28,7 @@ if (!isset($username)) {
 <table style="width: 100%;max-width: 600px; margin:auto;margin-bottom:20px;">
     <thead>
         <tr>
-            <td>Delete Thread (UNFINISHED)</td>
+            <td>Delete Thread</td>
         </tr>
     </thead>
     <tbody>
@@ -39,8 +39,8 @@ if (!isset($username)) {
         </tr>
         <tr>
             <td>
-                <form method="POST">
-                    <input type="number" placeholder="Post ID" name="postId">
+                <form method="POST" id="deleteThreadForm">
+                    <input type="number" placeholder="Post ID" name="threadId" id="deleteThreadInput">
                     <button type="submit" class="btn" name="submit">Delete</button>
                 </form>
             </td>
@@ -52,19 +52,19 @@ if (!isset($username)) {
 <table style="width: 100%;max-width: 600px; margin:auto;margin-bottom:20px;">
     <thead>
         <tr>
-            <td>Delete Post (UNFINISHED)</td>
+            <td>Delete Post</td>
         </tr>
     </thead>
     <tbody>
         <tr>
             <td>
-                This feature blanks out all images and text in a post
+                This will blank out the post and image, but will keep the image file.
             </td>
         </tr>
         <tr>
             <td>
-                <form method="POST">
-                    <input type="number" placeholder="Post ID" name="postId">
+                <form method="POST" id="deletePostForm">
+                    <input type="number" placeholder="Post ID" name="postId" id="deletePostInput">
                     <button type="submit" class="btn" name="submit">Delete</button>
                 </form>
             </td>
@@ -158,7 +158,7 @@ if (!isset($username)) {
 <table style="width: 100%;max-width: 600px; margin:auto;margin-bottom:20px;">
     <thead>
         <tr>
-            <td>Admin Post (UNFINISHED)</td>
+            <td>Admin Post</td>
         </tr>
     </thead>
     <tbody>
@@ -308,6 +308,50 @@ if (!isset($username)) {
         }
         return output;
     }
+    async function deleteThread(event) {
+
+        const formData = new FormData();
+
+        formData.append("threadId", document.getElementById("deleteThreadInput").value);
+
+        let output = []
+
+        try {
+            const response = await fetch("/api/sys/deleteThread.php", {
+                    method: "POST",
+                    // Set the FormData instance as the request body
+                    body: formData
+                }).then(response => response.json()) // Parse the JSON response from the server
+                .then(data => {
+                    output = data;
+                })
+        } catch (e) {
+            console.error(e);
+        }
+        return output;
+    }
+    async function deletePost(event) {
+
+        const formData = new FormData();
+
+        formData.append("postId", document.getElementById("deletePostInput").value);
+
+        let output = []
+
+        try {
+            const response = await fetch("/api/sys/deletePost.php", {
+                    method: "POST",
+                    // Set the FormData instance as the request body
+                    body: formData
+                }).then(response => response.json()) // Parse the JSON response from the server
+                .then(data => {
+                    output = data;
+                })
+        } catch (e) {
+            console.error(e);
+        }
+        return output;
+    }
     document.getElementById("newReplyForm").addEventListener("submit", (event) => {
         event.preventDefault();
         newReply().then(alert("Reply Sent"));
@@ -316,5 +360,14 @@ if (!isset($username)) {
     document.getElementById("newThreadForm").addEventListener("submit", (event) => {
         event.preventDefault();
         newThread().then(alert("Thread Sent"));
+    });
+
+    document.getElementById("deleteThreadForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        deleteThread().then(alert("Thread Deleted"));
+    });
+    document.getElementById("deletePostForm").addEventListener("submit", (event) => {
+        event.preventDefault();
+        deletePost().then(alert("Thread Deleted"));
     });
 </script>
