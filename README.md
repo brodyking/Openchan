@@ -46,6 +46,8 @@ git clone https:/github.com/brodyking/openchan
 
 2. Start your apache server in the root directory.
 
+3. Change the default admin username/password in `/api/sys/accounts.php`.
+
 ## Roadmap
 
 - [x] Thread Creation
