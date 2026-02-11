@@ -3,7 +3,14 @@
 // Set the response header to indicate JSON content
 header('Content-Type: application/json');
 
+include "config.php";
+
 if (isset($_POST["author"]) && isset($_POST["body"]) && isset($_POST["title"]) && isset($_POST["board"])) {
+
+    if (!in_array($_POST["board"], $config["allowThreads"])) {
+        echo json_encode(array("error" => true, "errormessage" => "This board does not accept new threads."));
+        die();
+    }
 
     $db = null;
     $content = null;
