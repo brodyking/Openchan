@@ -196,6 +196,11 @@ const posts = async () => {
     // Replies
     let replies = data
     replies.forEach((reply) => {
+
+      if (reply.role == "admin") {
+        reply.author = "<span class='admin'>## Admin ##</span> " + reply.author;
+      }
+
       // Create each thread
       document.getElementById("allReplies").innerHTML += "<table><thead><td><b>" + reply.author + "</b></td><td>" + reply.date + "</td><td>#" + reply.id + "</td></thead><tbody><tr><td id='reply-img-" + reply.id + "'></td></tr><tr><td class='replybody' id='reply-" + reply.id + "'></td></tr></tbody></table>"
       document.getElementById("reply-" + reply.id).innerText = reply.body;
