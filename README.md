@@ -2,6 +2,8 @@
 
 _" A modern take on imageboard software."_
 
+<img src="img/example.png" style="width: 100%">
+
 > [!NOTE]
 > If you are looking for the classic, no database version, you can find it in
 > the v1 branch.
