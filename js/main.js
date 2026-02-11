@@ -82,11 +82,12 @@ const meta = async () => {
   // Populate thread list
   await Api.getThreadsFromBoard("meta").then((output) => {
     output.forEach((element) => {
-      console.log(JSON.parse(element.content));
-      if (element.role == "admin") {
-        element.author = "<span class='admin'>## Admin ##</span> " + element.author;
+      if (element != true && element != false) { // If post is deleted / not sent correctly. This is hacky and will get fixed at some point
+        if (element.role == "admin") {
+          element.author = "<span class='admin'>## Admin ##</span> " + element.author;
+        }
+        document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td><td>' + JSON.parse(element.content).length + '</td><td>' + element.date + '</tr>';
       }
-      document.getElementById("threadsBody").innerHTML += '<tr><td><a href="/thread?id=' + element.id + '">' + element.title + '</a></td><td>' + element.author + '</td><td>' + JSON.parse(element.content).length + '</td><td>' + element.date + '</tr>';
     })
   });
 }
