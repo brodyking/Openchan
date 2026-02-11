@@ -1,110 +1,63 @@
-> [!CAUTION]
-> This software is insecure, and should not be used without scrubbing the user input data.
+# Openchan 🍀
 
+_" A modern take on imageboard software."_
 
-<div id="top"></div>
+<img src="img/example.png" style="width: 100%">
 
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="static/openchan.png" alt="Logo" height="100">
-  </a>
+> [!NOTE]
+> If you are looking for the classic, no database version, you can find it in
+> the v1 branch.
 
-  <h3 align="center">Openchan</h3>
+Openchan is a **simple** and **lightweight**, imageboard software with a focus
+on modern techonologies. This project utilizes javascript for all frontend
+rendering, and PHP for the backend API. This projects small codebase and few
+dependencies allows for easy modification. Out of the box, Openchan is simple
+and includes just the basics: thread creation, image uploading, and replies.
+Apart from that, it is up to the site developer to implement other features.
 
-  <p align="center">
-    A lightweight imageboard script written without a database.
-    <br />
-  </p>
-</div>
+If you are looking for a more "feature-rich" imageboard software, I would advise
+you to checkout [vichan](https://github.com/vichan-devel/vichan). It is a proven
+imageboard software also written in PHP with active development.
 
+> [!WARNING]
+> This software is in development. Review the codebase before use. Some
+> functions may be insecure.
 
+## User Features
 
-<!-- ABOUT THE PROJECT -->
-## About The Project
+- Thread Creation
+- Image uploading
+- Replies
+- Overview of all posts
 
-<img src="static/example.gif" style="width: 100%">
+## Developer Features
 
-There are many imageboard scripts out there for anyone to use, so why this one? Well there is not really a reason. If you like a simplier layout and a more textboard style website that also supports images, then this script is for you! But I still would not reccomend anyone use this script yet. There are a few things that have not been done to make this secure yet. I will talk about it later in this readme.
+- Few dependencies
+- SQLite database
+- Browser-side rendering/page generation (saves on server processing)
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+## Requires
 
+- PHP (8+)
+- SQLite
+- Apache with mod_rewrite
 
+## Installation
 
-### Built With
+1. Clone this repo:
 
-Usually, this part of the readme would be really big... But not this time! This entire project was written in PHP, so there are no dependencies.
+```
+git clone https:/github.com/brodyking/openchan
+```
 
-<p align="right">(<a href="#top">back to top</a>)</p>
+2. Start your apache server in the root directory.
 
-<!-- GETTING STARTED -->
-## Getting Started
+3. Change the default admin username/password in `/api/sys/accounts.php`.
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Installation
-
-Just clone the repository and start up your PHP server. The PHP used is very basic so almost all versions should work.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-To create a new board, just copy the /b/ folder and change the folder name and $bn variable inside of /boardname/index.php. All posts are stored in a database.html file for each board and and images are stored in the /boardname/data/ folder.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- ROADMAP -->
 ## Roadmap
 
-- [x] Add MOAR CSS
-- [x] Allow Image Uploading
-- [ ] Make it so you cant post <script> inside of your post body
-- [ ] Add formatting for greentext and bold. Currently you can use HTML, which is insecure.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTRIBUTING -->
-## Contributing
-
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
-
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- LICENSE -->
-## License
-
-This project currently has no license because I am lazy and havent chosen one yet.
-
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-
-
-<!-- CONTACT -->
-## Contact
-
-Brody King - [mailto:bk.2k@hotmail.com](bk.2k@hotmail.com)
-
-Project Link: [https://github.com/brodyking/Openchan](https://github.com/brodyking/Openchan)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+- [x] Thread Creation
+- [x] Replies
+- [x] Image uploading
+- [x] Boards
+- [x] Admin panel
