@@ -6,7 +6,7 @@ _" A modern take on imageboard software."_
 
 > [!NOTE]
 > If you are looking for the classic, no database version, you can find it in
-> the v1 branch.
+> the [v1 branch](https://github.com/brodyking/Openchan/tree/v1).
 
 Openchan is a **simple** and **lightweight**, imageboard software with a focus
 on modern techonologies. This project utilizes javascript for all frontend
